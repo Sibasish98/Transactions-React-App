@@ -116,6 +116,8 @@ function App(props) {
     }
       ).then((dt) => {
         setisLoading(false)
+        context.setSnackBarActive(true)
+        context.setsnackBarTextType = 0
        navigate("/")
       })
 

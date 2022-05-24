@@ -60,6 +60,7 @@ const Mainpage = (props) => {
         </>
       )
     }
+    
     const gettData = () => {
       setransactionDetailsLoading(true)
         //fetch("http://192.168.29.167:5000/transactions")
@@ -100,10 +101,16 @@ const Mainpage = (props) => {
     }
 
 
-    const onDarkModeToggle = (ev) => {
+    const OnDarkModeToggle = (ev) => {
+
       context.setDarkModeActive(ev.target.checked)
+
     }
- 
+    
+
+
+
+
     const [currentSelectedRecord,setcurrentSelectedRecord] = React.useState(-1);
 
     const DeleteDilogue = () => {
@@ -137,6 +144,8 @@ const Mainpage = (props) => {
       })
       .then((e) => 
       {
+        context.setsnackBarTextType(1)
+        context.setSnackBarActive(true)
         setdeleteDilogOpen(false)
         setisLoading(false)
         getFundBalance()
@@ -150,7 +159,7 @@ const Mainpage = (props) => {
             <AppBar  color="primary" position="static">
                 <Toolbar ><Typography sx={{ flexGrow: 1 }}>Special Fund</Typography>
                 <FormGroup>
-                    <FormControlLabel control={<Switch color="secondary" checked={context.darkModeActive} onChange={onDarkModeToggle}  />} label="Dark Theme" />
+                    <FormControlLabel control={<Switch color="secondary" checked={context.darkModeActive} onChange={OnDarkModeToggle}  />} label="Dark Theme" />
                 </FormGroup>
                 </Toolbar>
 
@@ -205,7 +214,7 @@ const Mainpage = (props) => {
 
     {context.snackBarActive?<Snackbar open autoHideDuration={2000} >
             <Alert  severity="success" sx={{ width: '100%' }}>
-                  Payment was successfull
+                  {context.snackBarTextType==0?"Payment was successfull":"Deletion was successfull"}
             </Alert>
         </Snackbar>:""}
         </div>

@@ -21,10 +21,32 @@ root.render(
 );
 function Launch()
 {
+      //use local storage for dark theme value
+
+
+
+     
+
+
+
     const [snackBarActive,setSnackBarActive] = React.useState(false)
-    const [darkModeActive,setDarkModeActive] = React.useState(true)
+    const [themeLoading,setthemeLoading] = React.useState(true);
 
+    const [snackBarTextType,setsnackBarTextType] = React.useState(0)
+let darkTheme = false;
+    React.useEffect(() => {
+      const tempThemee = localStorage.getItem('darktheme')
+    
+      setDarkModeActive(tempThemee== 'true')
+      setthemeLoading(false)
+    },[])
+    const [darkModeActive,setDarkModeActive] = React.useState(darkTheme)
 
+    React.useEffect(() => {
+      localStorage.setItem('darktheme',darkModeActive)
+     
+    },[darkModeActive])
+    
     const theme = createTheme({
       palette: {
         /*primary: {
@@ -36,15 +58,18 @@ function Launch()
     });
 
 
-
+    if (!themeLoading)
     return (
       <ThemeProvider theme={theme}>
-        <MainContext.Provider value={{snackBarActive,setSnackBarActive,darkModeActive,setDarkModeActive}}>
+        <MainContext.Provider value={{snackBarActive,setSnackBarActive,darkModeActive,setDarkModeActive,snackBarTextType,setsnackBarTextType}}>
         <Routes>
            <Route  path='/' element={<MainPage/>}/>
            <Route path="/payment" element={<App/>}/>
         </Routes>
         </MainContext.Provider>
         </ThemeProvider>
+      
     )
+    else
+    return ""
 }
