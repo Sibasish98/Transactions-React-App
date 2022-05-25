@@ -111,7 +111,7 @@ function App(props) {
         type: type,
         subject: subject,
         amount: amount,
-        datetime: new Date().toString(),
+        //datetime: new Date().toString(),
       })
     }
       ).then((dt) => {

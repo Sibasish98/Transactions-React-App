@@ -71,7 +71,7 @@ const Mainpage = (props) => {
         })
         .then((content) => {
           
-          setTransactionData(content.transactions.reverse());
+          setTransactionData(content.transactions);
           setransactionDetailsLoading(false);
 
       })
@@ -115,7 +115,7 @@ const Mainpage = (props) => {
 
     const DeleteDilogue = () => {
       return (
-        <Dialog onTouchCancel open={deleteDilogOpen}>
+        <Dialog  open={deleteDilogOpen}>
             <DialogTitle>
               Delete item  with id {deleteID} and {deleteSubject} subject?
             </DialogTitle>
@@ -175,14 +175,15 @@ const Mainpage = (props) => {
               <Typography color={context.darkModeActive?darkModeColors.textColor:''}  variant="h2">{fundBalanceLoading?<Skeleton></Skeleton>:`₹${fundBalance}`}</Typography>
             </Grid>
             <TableContainer component={Paper}>
-      <Table sx={{ maxWidth: '100%',maxHeight: '70vh'}} aria-label="simple table">
+      <Table  sx={{ maxWidth: '100%',maxHeight: '70vh'}} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
+  
             <TableCell >Type</TableCell>
             <TableCell >Subject</TableCell>
             <TableCell >Amount</TableCell>
             <TableCell >Date {"&"} Time</TableCell>
+            <TableCell>Transaction ID</TableCell>
           </TableRow>
           </TableHead>
         <TableBody>
@@ -190,19 +191,21 @@ const Mainpage = (props) => {
             {
             transactionDetailsLoading?<TableSekeltonCell/>:
             transactionData.map((data) => 
-            <TableRow sx={{backgroundColor:  currentSelectedRecord===data.id?(!context.darkModeActive?"#ef5350":"#c62828"):""}} onClick={() => {
-              setcurrentSelectedRecord(data.id)
-              setDeleteID(data.id)
+            <TableRow sx={{backgroundColor:  currentSelectedRecord===data._id?(!context.darkModeActive?"#ef5350":"#c62828"):""}} onClick={() => {
+              setcurrentSelectedRecord(data._id)
+              setDeleteID(data._id)
               setdeleteSubject(data.subject)
               setdeleteDilogOpen(true)
               
-            }}  key={data.id} >
-                <TableCell>{data.id}</TableCell>
+            }}  key={data._id} >
+
                 <TableCell sx={{color: data.type=="debit"?'red':'green'}}>{data.type}</TableCell>
                 <TableCell>{data.subject}</TableCell>
                 <TableCell>{data.amount}</TableCell>
                 <TableCell>{data.datetime}</TableCell>
-           
+               
+                <TableCell sx={{}} >{data._id}</TableCell>
+                
             </TableRow>
             )}
         </TableBody>
