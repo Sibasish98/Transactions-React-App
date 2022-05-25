@@ -30,7 +30,7 @@ function App(props) {
             
       <AppBar color="primary" position='static' >
         <Toolbar sx={{justifyContent: 'center'}}>
-          <Typography >Payment</Typography>
+          <Typography >Generate Transaction</Typography>
         </Toolbar>
       </AppBar>
      <Grid container 
@@ -67,7 +67,7 @@ function App(props) {
        
 
         <Grid item>
-        <Button color="secondary" onClick={onPayButtonClicked} sx={{marginTop: '20px',width: '20ch'}} variant='contained'>PAY</Button>
+        <Button color="secondary" onClick={onPayButtonClicked} sx={{marginTop: '20px',width: '20ch'}} variant='contained'>GENERATE</Button>
         </Grid>
         <Grid item>
         <Button color="secondary" onClick={() => navigate("/")} sx={{marginTop: '10px',width: '20ch'}} fullWidth variant='outlined'>CANCEL</Button>
